@@ -40,8 +40,12 @@
         </tr>
       </table>
         <!--ここにコメント機能を追加-->
-        <% form_with model: [@book,@book_comment] %>
-        <p>test</p>
+        <%= form_with model: [@book,@book_comment] do |f| %>
+          <%= f.text_area :comment %><br>
+          <%= f.submit "送信" %>
+        <% end %>
+
+
     </div>
   </div>
 </div>
