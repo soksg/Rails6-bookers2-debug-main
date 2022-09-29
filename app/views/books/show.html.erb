@@ -11,7 +11,7 @@
   		<table class='table'>
   		  <tr>
           <td><%= link_to user_path(@book.user) do %>
-            <%= image_tag @book.user.get_profile_image(100,100) %><br>
+            <%= image_tag @book.user.get_profile_image(80,80) %><br>
             <%= @book.user.name %>
             <% end %>
           </td>
@@ -35,17 +35,37 @@
             ♡<%= @book.favorites.count %>
                 <% end %>
             </td>
-            <td>コメント数：<% @book.book_comments.count %></td>
-          <% end %>
+            <% end %>
+            <td>コメント数：<%= @book.book_comments.count %></td>
         </tr>
       </table>
-        <!--ここにコメント機能を追加-->
+      <table>
+        <% @book.book_comments.each do |book_comment| %>
+          <tr>
+            <td>
+              <%= link_to user_path(@user) do %>
+                <%= image_tag book_comment.user.get_profile_image(80,80) %><br>
+                <%= book_comment.user.name %>
+              <% end %>
+            </td>
+            <td>
+              <%= book_comment.comment %>
+            </td>
+            <td>
+              <%= link_to book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-danger" do%>
+                <span> destroy </span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+      <div>
         <%= form_with model: [@book,@book_comment] do |f| %>
           <%= f.text_area :comment %><br>
           <%= f.submit "送信" %>
         <% end %>
-
-
+      </div>
     </div>
   </div>
 </div>
