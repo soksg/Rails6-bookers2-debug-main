@@ -14,13 +14,30 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :followeds, through: :relationships, source: :followed
+  has_many :followings, through: :relationships, source: :followed
 
 
   has_one_attached :profile_image
 
   validates :name, presence: true, length: { in: 2..20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
+
+
+
+  # モデル
+  # フォローしたときの処理
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
+  # フォローを外すときの処理
+  def unfollow(user_id)
+    relationships.find_by(followed_id: user_id).destroy
+  end
+  # フォローしているか判定
+  def following?(user)
+    followings.include?(user)
+  end
+
 
 
   def get_profile_image(width, height)
