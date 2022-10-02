@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
+  # before_action :set_user, only: [:followings, :followers]
 
   def index
     @users = User.all
@@ -15,7 +16,6 @@ class UsersController < ApplicationController
 
   def edit
     @user=User.find(params[:id])
-
   end
 
   def update
@@ -26,6 +26,14 @@ class UsersController < ApplicationController
       render "edit"
     end
   end
+
+  # def followings_users
+  #   @users=@user.followings
+  # end
+
+  # def followers_users
+  #   @users=@user.followers
+  # end
 
   private
 
@@ -39,4 +47,9 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
+
+  # def set_user
+  #   @user=User.find(params[:id])
+  # end
+
 end
