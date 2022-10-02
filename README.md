@@ -1,16 +1,7 @@
 # README
-## DMMWEBCAMP学習コンテンツ 応用課題２です
+## DMMWEBCAMP学習コンテンツ 応用課題の内容です
 
-  <% if @book.errors.any? %>
-  <div id="error_explanation">
-    <h3><%= @book.errors.count %> errors prohibited this obj from being saved:</h3>
-    <ul>
-      <% @book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
